@@ -7,7 +7,7 @@ services:
     ports:
       - "8000:8000"
     volumes:
-      - ./base:/base
+      - ./service:/service
     environment:
       - DB_HOST=database
       - DB_NAME=dbname
@@ -26,3 +26,20 @@ services:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=1234
 
+  redis:
+    image: redis
+    hostname: redis
+
+
+  worker:
+    build:
+      context: .
+    hostname: worker
+    entrypoint: celery
+    command: -A celery_app.app worker --loglevel=info
+    volumes:
+      - ./service:/service
+    links:
+      - redis
+    depends_on:
+      - redis

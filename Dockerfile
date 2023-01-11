@@ -4,7 +4,7 @@ COPY service /service
 WORKDIR /service
 EXPOSE 8000
 
-RUN apk add postgresql-client
+#RUN apk add postgresql-clients
 
 RUN pip install -r /temp/requirements.txt
 
