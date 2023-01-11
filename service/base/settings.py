@@ -35,6 +35,7 @@ INSTALLED_APPS = [
 
     'clients.apps.ClientConfig',
     'services.apps.ServicesConfig',
+    'api.apps.ApiConfig',
 ]
 
 MIDDLEWARE = [
