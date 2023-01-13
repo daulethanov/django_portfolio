@@ -1,18 +1,13 @@
 import os
 from pathlib import Path
 from dotenv import load_dotenv
+from .dev import *
 
 load_dotenv()
 
-BASE_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
 SECRET_KEY = 'django-insecure-o6o*ktw+f2vwyl9pdzwi(80n7))@19^pcsai-80x8+e+5gbv7_'
-
-DEBUG = True
-
-ALLOWED_HOSTS = ['0.0.0.0']
-
-CORS_ALLOWED_ORIGINS = []
 
 
 INSTALLED_APPS = [
@@ -45,7 +40,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'base.urls'
+ROOT_URLCONF = 'config.urls'
 
 TEMPLATES = [
     {
@@ -63,7 +58,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'base.wsgi.application'
+WSGI_APPLICATION = 'config.wsgi.application'
 
 DATABASES = {
     'default': {
@@ -101,6 +96,7 @@ USE_TZ = True
 
 
 STATIC_URL = 'static/'
+STATIC_ROOT = os.path.join(BASE_DIR/'static')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 

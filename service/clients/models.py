@@ -13,5 +13,8 @@ class Client(models.Model):
     numbers = models.PositiveIntegerField()
     vocation = models.CharField(max_length=20, choices=VOCATION, default='Customer')
 
+    class Meta:
+        verbose_name = 'Пользователь'
+        verbose_name_plural = 'Пользователи'
 
 
