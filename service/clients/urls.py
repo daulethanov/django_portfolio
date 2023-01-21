@@ -1,6 +1,9 @@
-from django.urls import path, include, re_path
+from django.urls import path, include
+from .views import *
 
 urlpatterns = [
-    path('auth/', include('djoser.urls')),
-    path('auth/', include('djoser.urls.authtoken'))
+
+
+    # path('register', Register.as_view(), name='register'),
+    # path('activate', ActivateView.as_view(), name='activate')
 ]

@@ -1,7 +1,7 @@
-from django.contrib.auth.models import AbstractUser, User
+from django.contrib.auth.models import User
 from django.db import models
 
-from clients.models import Client
+
 
 CATEGORY = (
     ('Developer', 'Developer'),
@@ -15,12 +15,12 @@ TASK_COMPLETED = (
     ('Task completed', 'Task completed'),
     ('Pending', 'Pending'),
     ('Looking for', 'Looking for')
-
 )
 
 
 class Customer(models.Model):
-    users = models.OneToOneField(Client, on_delete=models.CASCADE)
+    users = models.OneToOneField(User
+                                 , on_delete=models.CASCADE )
 
     class Meta:
         verbose_name = 'Заказчик'
@@ -34,8 +34,8 @@ class CustomerOrder(models.Model):
     description = models.TextField()
     # photo = models.ImageField(upload_to='media/CustomerOrder/', null=True, blank=True)
     price = models.PositiveIntegerField()
-    task_completed = models.CharField(max_length=100, choices=TASK_COMPLETED, default='Looking for')
     dogovor_price = models.BooleanField(default=False)
+    task_completed = models.CharField(max_length=100, choices=TASK_COMPLETED, default='Looking for')
 
     class Meta:
         verbose_name = 'Заказ'
@@ -43,8 +43,9 @@ class CustomerOrder(models.Model):
 
 
 class Executor(models.Model):
-    users = models.OneToOneField(Client, on_delete=models.CASCADE)
+    users = models.ForeignKey(User, on_delete=models.CASCADE)
     portfolio_text = models.TextField()
+
     # portfolio_photo = models.ImageField(upload_to='media/executor/portfolio')
 
     class Meta:
@@ -53,10 +54,17 @@ class Executor(models.Model):
 
 
 class ExecutorOrder(models.Model):
-    executor = models.OneToOneField(Executor, on_delete=models.CASCADE)
+    executor = models.ForeignKey(Executor, on_delete=models.CASCADE)
     order = models.ForeignKey(CustomerOrder, on_delete=models.CASCADE)
 
     class Meta:
         verbose_name = 'Исполнитель заказа'
         verbose_name_plural = 'Исполнитель заказов'
+
+
+class Message(models.Model):
+    executor = models.OneToOneField(Executor, on_delete=models.CASCADE)
+    customer = models.OneToOneField(Customer, on_delete=models.CASCADE)
+    message = models.TextField('Сообщение')
+    create_at = models.DateTimeField(auto_now_add=True)
 

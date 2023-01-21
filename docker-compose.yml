@@ -1,7 +1,7 @@
 version: '3'
 
 services:
-  web-app:
+  backend:
     build:
       context: .
     ports:
@@ -10,7 +10,7 @@ services:
       - ./service:/service
     environment:
       - DB_HOST=database
-      - DB_NAME=dbname
+      - DB_NAME=dbname2
       - DB_USER=postgres
       - DB_PASSWORD=1234
 
@@ -22,7 +22,7 @@ services:
   database:
     image: postgres:14.6-alpine
     environment:
-      - POSTGRES_DB=dbname
+      - POSTGRES_DB=dbname2
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=1234
 
@@ -59,3 +59,16 @@ services:
       - redis
     ports:
       - "5555:5555"
+
+#  frontend:
+#    build:
+#      context: ./frontend/
+#      dockerfile: Dockerfile
+#    ports:
+#      - "3000:3000"
+#    command: npm start
+#    volumes:
+#      - /frontend/node_modules
+#
+#    depends_on:
+#      - backend

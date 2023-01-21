@@ -6,3 +6,4 @@ celery[redis]==5.2.7
 flower==1.2.0
 djoser==2.0.5
 django-cors-headers==3.13.0
+djangorestframework-simplejwt==5.2.2
