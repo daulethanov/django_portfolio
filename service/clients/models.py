@@ -1,25 +1,54 @@
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, PermissionsMixin
 from django.db import models
+from django.contrib.auth.models import BaseUserManager, AbstractBaseUser
 
 
-# class Users(AbstractUser):
-#     REQUIRED_FIELDS = []
-#     USERNAME_FIELD = 'email'
-#
-#     username = models.CharField(max_length=100)
-#     email = models.EmailField('Почта', unique=True, blank=False, null=False)
-#     first_name = models.CharField('Имя', max_length=60, null=True, blank=True)
-#     last_name = models.CharField('Фамилия', max_length=60, null=True, blank=True)
-#     phone = models.PositiveIntegerField('Номер телефона', null=True, blank=True)
-#     is_staff = models.BooleanField('staff status', default=False)
-#     is_active = models.BooleanField('active', default=True)
-#     is_verified = models.BooleanField('verified', default=False)
-#     is_email_verified = models.BooleanField(default=False)
-#     email_verification_key = models.CharField(max_length=32)
-#
-#     class Meta:
-#         verbose_name = 'Пользователь'
-#         verbose_name_plural = 'Пользователь'
+class UserAccountManager(BaseUserManager):
+    def create_user(self, first_name, last_name, email, password=None):
+        if not email:
+            raise ValueError("Error")
+
+        email = self.normalize_email(email)
+        email = email.lower()
+
+        user = self.model(
+            first_name=first_name,
+            last_name=last_name,
+            email=email,
+        )
+        user.set_password(password)
+        user.save(using=self._db)
+
+        return user
+
+    def create_superuser(self, first_name, last_name, email, password=None):
+
+        user = self.create_user(
+            first_name=first_name,
+            last_name=last_name,
+            email=email,
+            password=password
+        )
+        user.is_staff = True
+        user.is_superuser = True
+        user.save(using=self._db)
+        return user
+
+
+class UserAccount(AbstractBaseUser, PermissionsMixin):
+    first_name = models.CharField('Имя', max_length=100)
+    last_name = models.CharField('Фамилия', max_length=100)
+    email = models.EmailField('Email', max_length=230, unique=True)
+    is_active = models.BooleanField(default=True)
+    is_staff = models.BooleanField(default=False)
+
+    objects = UserAccountManager()
+
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = ['first_name', 'last_name']
+
+    def __str__(self):
+        return self.email
 
 
 class Client(models.Model):
@@ -41,7 +70,7 @@ class Client(models.Model):
         ('TJ', 'Таджикистан'),
     )
 
-    user = models.OneToOneField(User, on_delete=models.PROTECT)
+    user = models.OneToOneField(UserAccount, on_delete=models.PROTECT)
     title = models.CharField(max_length=131)
     numbers = models.PositiveIntegerField()
     vocation = models.CharField(max_length=20, choices=VOCATION, default='Customer')

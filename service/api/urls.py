@@ -3,9 +3,8 @@ from .views import *
 
 
 urlpatterns = [
-    path('auth/', include('djoser.urls')),
-    path('auth/', include('djoser.urls.authtoken')),
-
+    path('order-list/', OrderList.as_view()),
+    path('order-create/', OrderCreate.as_view()),
     # path('executor/', ExecutorApiView.as_view()),
     # path('executor-order/', ExecutorOrderApiView.as_view()),
     # path('customer/', CustomerApiView.as_view()),

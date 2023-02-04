@@ -1,0 +1,152 @@
+@import "reset.css";
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Poppins:wght@400;500;700&display=swap');
+
+html, body{
+    font-family: 'DM Sans', sans-serif;
+    letter-spacing: -0.5px;
+    /*height: 100%;*/
+}
+
+/*.App{*/
+/*    min-height: 100%;*/
+/*    display: flex;*/
+/*    flex-direction: column;*/
+/*}*/
+
+
+.container{
+    max-width: 100%;
+
+}
+
+.navbar{
+    padding: 20px 30px;
+    background-color: #F2FAFA;
+    letter-spacing: normal;
+
+
+
+
+}
+
+.navbar-row{
+    display: flex;
+    justify-content: space-between;
+    column-gap: 30px;
+    row-gap: 20px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.navbar__list{
+    display: flex;
+    column-gap: 37px;
+}
+
+.authentication{
+    column-gap: 10px;
+    font-family: 'Poppins', sans-serif;
+
+}
+
+.navbar__logo{
+    font-size: 23px;
+}
+
+.navbar__logo-link{
+    color: black;
+}
+
+.navbar__list-link{
+    color: black;
+}
+
+/*FOOTER*/
+
+.footer{
+    padding: 60px 0 50px;
+    background-color: #171718;
+    color: white;
+}
+
+.social{
+    display: flex;
+    column-gap: 30px;
+    align-items: center;
+}
+
+.footer__wrapper{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 27px;
+}
+
+
+/*FORM */
+.auth{
+    padding: 0 10%;
+    height: 300px;
+
+}
+
+.auth__title{
+    margin-top: 10px;
+    font-size: 30px;
+    text-align: center;
+    font-weight: 500;
+}
+
+.auth__form{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 20px;
+    border-radius: 2px;
+
+}
+
+.auth__form-input{
+    width: 100%;
+    padding: 15px;
+    margin: 5px 0 22px 0;
+    display: inline-block;
+    border: none;
+    background: #f1f1f1;
+
+}
+
+.auth__auth{
+        margin-top: 20px;
+        padding: 10px;
+        background-color: #d3d3d3;
+        text-align: center;
+}
+
+.btn-auth{
+    background-color: #4CAF50;
+    color: white;
+    padding: 16px 20px;
+    margin: 8px 1px;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    opacity: 0.9;
+}
+.auth__auth-link{
+    font-weight: 500;
+    font-family: 'Poppins', sans-serif;
+    color: #000c64;
+
+}
+
+.auth__user-compete-p{
+    font-size: 9px;
+    color: #353535;
+}
+
+.navbar__list-icon{
+    height: 25px;
+    width: 25px;
+}

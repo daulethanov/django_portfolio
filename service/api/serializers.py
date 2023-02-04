@@ -11,7 +11,7 @@ class CustomerSerializer(serializers.ModelSerializer):
 class CustomerOrderSerializer(serializers.ModelSerializer):
     class Meta:
         model = CustomerOrder
-        fields = ['category', 'title', 'description', 'price', 'dogovor_price', 'task_completed']
+        fields = ['user', 'category', 'title', 'description', 'price', 'dogovor_price', 'task_completed']
 
 
 class ExecutorSerializer(serializers.ModelSerializer):

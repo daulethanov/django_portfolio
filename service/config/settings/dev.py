@@ -6,8 +6,12 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
-CORS_ALLOWED_ORIGINS = ['http://172.18.0.7:3000',
-                        'http://localhost:3000']
+CORS_ALLOWED_ORIGINS = [
+                        'http://172.18.0.7:3001',
+                        'http://localhost:3001',
+    'http://localhost:3000',
+
+]
 
 EMAIL_HOST = 'smtp.yandex.ru'
 EMAIL_PORT = 587

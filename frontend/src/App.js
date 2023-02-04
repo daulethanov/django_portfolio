@@ -1,33 +1,32 @@
 import React from "react";
-import {BrowserRouter, Route, Routes} from "react-router-dom";
-import Home from "./containers/Home";
-import Login from "./containers/Login";
-import Signup from "./containers/Signup";
-import ResetPasswordConfirm from "./containers/ResetPasswordConfirm";
-import ResetPassword from "./containers/ResetPassword";
-import Activate from "./containers/Activate";
+import Header from "./components /heaeder /Header";
+import Footer from "./components /footer/Footer";
+import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
 
-import Layout from "./hocs/Layout";
+import './style/main.css'
+import Register from "./pages/auhentication/Register";
+import Login from "./pages/auhentication/Login";
+import Home from "./pages/Home";
+import {StateProvider} from "./context";
+import {AuthProvider} from "./state";
+import Profile from "./pages/profile /Profile";
 
-import {Provider} from "react-redux";
-import store from "./store";
+const App = () => {
+    return (
+        <div className='App'>
+                <AuthProvider>
+            <Router>
+                <Routes>
+                    <Route path='/signup' element={<Register/>}/>
+                    <Route path='/login' element={<Login/>}/>
+                    <Route path='/' element={<Home/>}/>
+                    <Route path='/profile' element={<Profile/>}/>
+                </Routes>
+            </Router>
+                </AuthProvider>
+            {/*<Footer/>*/}
+        </div>
+    )
+}
 
-
-const App = () => (
-    <BrowserRouter>
-    <Provider store={store}>
-        <Layout>
-
-            <Routes>
-                <Route path='/' element={<Home />} />
-                <Route path="/login" element={<Login />} />
-                <Route path="/signup" element={<Signup />} />
-                <Route path='/reset_password' element={<ResetPassword />} />
-                <Route path='/password/rest/confirm/:uid/:token' element={<ResetPasswordConfirm />} />
-                <Route path='/activate/:uid/:token' element={<Activate />} />
-            </Routes>
-        </Layout>
-    </Provider>
-    </BrowserRouter>
-)
 export default App;

@@ -1,7 +1,7 @@
-from django.contrib.auth.models import User
 from django.db import models
-
-
+from clients.models import UserAccount
+from django.contrib.auth import get_user_model
+User = get_user_model()
 
 CATEGORY = (
     ('Developer', 'Developer'),
@@ -19,8 +19,7 @@ TASK_COMPLETED = (
 
 
 class Customer(models.Model):
-    users = models.OneToOneField(User
-                                 , on_delete=models.CASCADE )
+    users = models.OneToOneField(UserAccount, on_delete=models.CASCADE )
 
     class Meta:
         verbose_name = 'Заказчик'
@@ -28,7 +27,7 @@ class Customer(models.Model):
 
 
 class CustomerOrder(models.Model):
-    customer = models.OneToOneField(Customer, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     category = models.CharField(max_length=100, choices=CATEGORY, default='GameDev')
     title = models.CharField(max_length=200)
     description = models.TextField()
@@ -43,7 +42,7 @@ class CustomerOrder(models.Model):
 
 
 class Executor(models.Model):
-    users = models.ForeignKey(User, on_delete=models.CASCADE)
+    users = models.ForeignKey(UserAccount, on_delete=models.CASCADE)
     portfolio_text = models.TextField()
 
     # portfolio_photo = models.ImageField(upload_to='media/executor/portfolio')
